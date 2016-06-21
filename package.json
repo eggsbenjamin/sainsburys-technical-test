@@ -1,0 +1,31 @@
+{
+  "name": "sainsburys-technical-test",
+  "version": "1.0.0",
+  "description": "Nodejs Technical Test",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha --recursive"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eggsbenjamin/sainsburys-technical-test.git"
+  },
+  "keywords": [
+    "sainsburys",
+    "technical",
+    "test",
+    "node.js",
+    "js"
+  ],
+  "author": "Ben Davies",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eggsbenjamin/sainsburys-technical-test/issues"
+  },
+  "homepage": "https://github.com/eggsbenjamin/sainsburys-technical-test#readme",
+  "devDependencies": {
+    "should": "^9.0.2",
+    "sinon": "^1.17.4",
+    "supertest": "^1.2.0"
+  }
+}

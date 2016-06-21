@@ -1,2 +1,1 @@
-# sainsburys-technical-test
-Nodejs Technical Test
+#Nodejs Technical Test
