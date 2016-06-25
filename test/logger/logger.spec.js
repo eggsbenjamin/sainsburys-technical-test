@@ -42,9 +42,9 @@ describe('Logger', () => {
 					var error = `Invalid log level - ${invalidLevel}`;
 
 					it(`${invalidLevel} throws '${error}'`, () => {
-						() => {
+						(() => {
 							log(invalidLevel, 'test');
-						}.should.throw(`${error}`);	
+						}).should.throw(`${error}`)
 					});
 				});
 			});
@@ -69,9 +69,9 @@ describe('Logger', () => {
 					var error = `Invalid log message - ${invalidMessage}`;
 
 					it(`${invalidMessage} throws '${error}'`, () => {
-						() => {
+						(() => {
 							log('INFO', invalidMessage);
-						}.should.throw(`${error}`);
+						}).should.throw(`${error}`);
 					});	
 				});
 			});
