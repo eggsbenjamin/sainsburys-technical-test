@@ -3,11 +3,9 @@
 ## TODO
 
 * ~~[x] __Logger__~~
-* [x] __Helper Functions__
+* ~~[x] __Helper Functions_~~_
 	* ~~[x] postcode helper~~ 
-	* [ ] address format 
-	* [ ] time 
-	* [ ] uuid  
+	* ~~[x] address format~~ 
 * [ ] __API__
 	* [ ] __Data Endpoints__
 		* [ ] postcode endpoint
