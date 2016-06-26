@@ -1,0 +1,20 @@
+module.exports = [
+	-1,
+	0,
+	1,
+	NaN,
+	Infinity,
+	true,
+	false,
+	undefined,
+	null,
+	{},
+	function() {},
+	'',
+	' ',
+	'qqqq',
+	'qqqqqqqq',
+	'qqqq ',
+	' qqqq',
+	'q q'
+]

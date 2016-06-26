@@ -3,8 +3,8 @@
 ## TODO
 
 * ~~[x] __Logger__~~
-* [ ] __Helper Functions__
-	* [ ] postcode helper 
+* [x] __Helper Functions__
+	* ~~[x] postcode helper~~ 
 	* [ ] address format 
 	* [ ] time 
 	* [ ] uuid  
