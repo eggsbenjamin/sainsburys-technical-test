@@ -14,6 +14,7 @@
 	* [ ] __Service Endpoints__
 		* [ ] ping
 		* [ ] healthcheck
-	* [ ] define routes
+	* ~~[x] define routes~~
 	* [ ] end-to-end tests
-	
+* ~~[x] __Data Layer__~~	
+	* ~~[x] clinics~~
