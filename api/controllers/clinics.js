@@ -28,8 +28,8 @@ var getByPostCodeHandler = (req,res) => {
 						city : clinic.city
 					}); 
 	
-					clinic.formatted = `${clinic.organisation_name} (${formattedAddress})`;
-				
+					clinic.formatted = `${clinic.organisation_name || ''} (${formattedAddress})`;
+				console.log(clinic.formatted);
 					return clinic;	
 				});
 
@@ -38,8 +38,11 @@ var getByPostCodeHandler = (req,res) => {
 		}
 	
 		let handleError = (err) => { 
+			res.setHeader('Content-Type', 'application/json');
 			res.statusCode = 500;
-			res.end();
+			res.end(JSON.stringify({
+				message : 'Internal Server Error'
+			}));
 		}
 		
 		clinics.getByPartialPostcode(helpers.postcode.getOutwardCode(req.params.postcode))
@@ -91,7 +94,7 @@ var getByNameHandler = (req,res) => {
 				city : clinic.city
 			}); 
 
-			clinic.formatted = `${clinic.organisation_name} (${formattedAddress})`;
+			clinic.formatted = `${clinic.organisation_name || ''} (${formattedAddress})`; console.log(clinic.formatted);
 		});
 		
 		res.setHeader('Content-Type', 'application/json');
@@ -101,9 +104,12 @@ var getByNameHandler = (req,res) => {
 		}));
 	}
 
-	let handleError = (err) => { console.log(err);
+	let handleError = (err) => { 
+		res.setHeader('Content-Type', 'application/json');
 		res.statusCode = 500;
-		res.end();
+		res.end(JSON.stringify({
+			message : 'Internal Server Error'
+		}));
 	}
 
 	clinics.getByName(req.params.name)
@@ -112,7 +118,36 @@ var getByNameHandler = (req,res) => {
 }
 
 var getByCityHandler = (req,res) => {
+	
+	let _handleSuccess = (clinics) => {
+		let results = {};
 
+		clinics.result.forEach(clinic => {
+			let partial_postcode = clinic.partial_postcode; 
+			
+			if(partial_postcode) {
+				results[partial_postcode] ? results[partial_postcode]++ : results[partial_postcode] = 1;	
+			}
+		}) 
+
+		res.setHeader('Content-Type', 'application/json');
+		res.end(JSON.stringify({
+			results : results,
+			total : Object.keys(results).length
+		}));
+	}
+
+	let _handleError = (err) => { 
+		res.setHeader('Content-Type', 'application/json');
+		res.statusCode = 500;
+		res.end(JSON.stringify({
+			message : 'Internal Server Error'
+		}));
+	}
+
+	clinics.getByCity(req.params.city)
+	       .then(_handleSuccess)
+	       .catch(_handleError);
 }
 
 module.exports = {

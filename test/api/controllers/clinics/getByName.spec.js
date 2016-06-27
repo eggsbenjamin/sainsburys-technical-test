@@ -63,7 +63,7 @@ describe('get clinic by name endpoint', () => {
 		});
 
 	
-		it('returns a 500', () => {
+		it('returns a 500', done => {
 			datasources.clinics.getByName.returns(new Promise.reject({}));
 
 			app.get(uri)
