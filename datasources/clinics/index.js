@@ -1,5 +1,46 @@
 var request = require('request-promise');
+var Promise = require('bluebird');	//	'request-as-promised' uses this Promise implementation
 var config = require('../../config').api;
+var logger = require('../../logger');
+
+/** 
+*	@access private
+*	@summary handles succesful responses by logging the url and status code
+*	@param {Object} response
+*	@returns {Promise} resolve
+*/
+
+var _handleSuccess = (response) => {  
+	logger.log('INFO', `response from : ${response.request.url.hostname} (${response.statusCode})`,{
+	method : response.request.method,
+	href : response.request.href
+});
+	return response.body;
+}
+
+/**
+*	@access private
+*	@summary handles errors and non 200 responses by logging out info  
+*	@param {Object} response
+*	@returns {Promise} rejection
+*/
+
+var _handleError = (response) => {
+	if(response.error) {
+		logger.log('ERROR', `${response.error.message}`, response.error);
+		return new Promise.reject(response.error);
+	} else {
+		logger.log('INFO', `response from : ${response.request.url.hostname} (${response.statusCode})`,{
+			method : response.request.method,
+			href : response.request.href
+		});
+
+		return new Promise.reject({
+			statusCode : response.statusCode,
+			body : response.body
+		});
+	}
+}
 
 /**
 *	@access public
@@ -17,7 +58,8 @@ var getByPartialPostcode = function(partialPostcode) {
 		json : true,
 		simple : false,
 		resolveWithFullResponse : true
-	});
+	}).then(_handleSuccess)
+	.catch(_handleError);
 }
 
 /**
@@ -36,7 +78,8 @@ var getByName = function(name) {
 		json : true,
 		simple : false,
 		resolveWithFullResponse : true
-	});
+	}).then(_handleSuccess)
+	.catch(_handleError);
 }
 
 /**
@@ -55,7 +98,8 @@ var getByCity = function(city) {
 		json : true,
 		simple : false,
 		resolveWithFullResponse : true
-	});
+	}).then(_handleSuccess)
+	.catch(_handleError);
 }
 
 module.exports = {

@@ -13,18 +13,9 @@ var logger = require('../../logger');
 var getByPostCodeHandler = (req,res) => {
 	
 	try {
-		logger.log('INFO', 'incoming request', {
-			uri : req.url,
-			headers : req.headers,
-			method : req.method,
-			user_ip : req.headers['x-forwarded-for'] || req.connection.remoteAddress
-		});
-
 		let postcode = helpers.postcode.format(req.params.postcode);
 	
 		let handleSuccess = (clinics) => { 
-			
-			logger.log('INFO', 'clinics By name handler success', clinics);		
 			
 			let results = clinics.result
 				.filter(clinic => (clinic.postcode === postcode) ? true : false)
@@ -45,8 +36,7 @@ var getByPostCodeHandler = (req,res) => {
 			res.end(JSON.stringify(results));
 		}
 	
-		let handleError = (err) => { console.log(err);
-			logger.log('ERROR', 'clinics by postcode handler error', err);
+		let handleError = (err) => { 
 			res.statusCode = 500;
 			res.end();
 		}
@@ -84,20 +74,10 @@ var getByPostCodeHandler = (req,res) => {
 
 var getByNameHandler = (req,res) => {
 	
-	logger.log('INFO', 'Incoming Request', {
-		uri : req.url,
-		headers : req.headers,
-		method : req.method,
-		user_ip : req.headers['x-forwarded-for'] || req.connection.remoteAddress
-	});
-	
-	let handleSuccess = (clinicResults) => {  
-		logger.log('INFO', 'Clinics By Name Handler Success', clinicResults);		
-
+	let handleSuccess = (clinics) => {  
 		let pims_managed = 0;
-		let responseBody = {};
-		
-		clinicResults.result.map(clinic => {
+	
+		clinics.result.map(clinic => {
 			if(clinic.is_pims_managed === 'True') {
 				pims_managed++;
 			}
@@ -113,16 +93,14 @@ var getByNameHandler = (req,res) => {
 			clinic.formatted = `${clinic.organisation_name} (${formattedAddress})`;
 		});
 		
-		responseBody.pims_managed = pims_managed;
-		responseBody.results = clinicResults.result;
-		
 		res.setHeader('Content-Type', 'application/json');
-		res.end(JSON.stringify(responseBody));
+		res.end(JSON.stringify({
+			pims_managed : pims_managed,
+			results : clinics.result
+		}));
 	}
 
-	let handleError = (err) => {
-		logger.log('ERROR', 'Clinics By Name Handler Error', err);				
-
+	let handleError = (err) => { console.log(err);
 		res.statusCode = 500;
 		res.end();
 	}
