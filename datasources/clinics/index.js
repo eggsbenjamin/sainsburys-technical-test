@@ -11,7 +11,7 @@ var logger = require('../../logger');
 */
 
 var _handleSuccess = (response) => {  
-	logger.log('INFO', `response from : ${response.request.url.hostname} (${response.statusCode})`,{
+	logger.log('INFO', `response from : ${response.request.href} (${response.statusCode})`,{
 	method : response.request.method,
 	href : response.request.href
 });
@@ -26,7 +26,7 @@ var _handleSuccess = (response) => {
 */
 
 var _handleError = (response) => {
-	if(response.error) {
+	if(response.error) { 
 		logger.log('ERROR', `${response.error.message}`, response.error);
 		return new Promise.reject(response.error);
 	} else {
@@ -50,13 +50,17 @@ var _handleError = (response) => {
 */
 
 var getByPartialPostcode = function(partialPostcode) {
+	logger.log('INFO', `making request to ${config.endpoints.CLINICS_POSTCODE}`, {
+	partial_postcode : partialPostcode
+	});	
+
+
 	return request({
 		uri : config.endpoints.CLINICS_POSTCODE,
 		qs : {
 			partial_postcode : partialPostcode
 		},
 		json : true,
-		simple : false,
 		resolveWithFullResponse : true
 	}).then(_handleSuccess)
 	.catch(_handleError);
@@ -70,13 +74,17 @@ var getByPartialPostcode = function(partialPostcode) {
 */
 
 var getByName = function(name) {
+	logger.log('INFO', `making request to ${config.endpoints.CLINICS_NAME}`, {
+		organisation_name : name
+	});	
+
+
 	return request({
 		uri : config.endpoints.CLINICS_NAME,
 		qs : {
 			organisation_name : name
 		},
 		json : true,
-		simple : false,
 		resolveWithFullResponse : true
 	}).then(_handleSuccess)
 	.catch(_handleError);
@@ -90,13 +98,17 @@ var getByName = function(name) {
 */
 
 var getByCity = function(city) { 
+	logger.log('INFO', `making request to ${config.endpoints.CLINICS_CITY}`, {
+		city : city
+	});	
+	
+
 	return request({
 		uri : config.endpoints.CLINICS_CITY,
 		qs : {
 			city : city
 		},
 		json : true,
-		simple : false,
 		resolveWithFullResponse : true
 	}).then(_handleSuccess)
 	.catch(_handleError);

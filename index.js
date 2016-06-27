@@ -1,7 +1,7 @@
 var http = require('http');
 var Router = require('node-simple-router');
 var config = require('./config');
-var controllers = require('./api/controllers');
+var controllers = require('./api/controllers'); 
 var app = new Router({
 	logging : false		//	disable 'node-simple-router' default logging
 });
@@ -12,9 +12,9 @@ var app = new Router({
 
 //	clinics
 
-app.get('/clinics/postcode/:postcode', controllers.clinics.getByPostCode);
+app.get('/clinics/postcode/:postcode', controllers.clinics.getByPostcode);
 app.get('/clinics/name/:name', controllers.clinics.getByName);
-app.get('/clinics/city/:name', controllers.clinics.getByCity);
+app.get('/clinics/city/:city', controllers.clinics.getByCity);
 
 //	service
 
