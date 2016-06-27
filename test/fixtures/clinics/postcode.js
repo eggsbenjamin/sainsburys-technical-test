@@ -53,6 +53,6 @@ module.exports = [
 			]
 		},
 		postcodeURIParam : 'SW131AA',
-		expectedClinics : 1
+		expectedClinics : 0
 	}
 ];

@@ -3,7 +3,7 @@ var Router = require('node-simple-router');
 var config = require('./config');
 var controllers = require('./api/controllers');
 var app = new Router({
-	logging : true		//	disable 'node-simple-router' default logging
+	logging : false		//	disable 'node-simple-router' default logging
 });
 
 /*

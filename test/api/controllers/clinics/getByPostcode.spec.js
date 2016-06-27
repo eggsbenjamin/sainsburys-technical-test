@@ -22,28 +22,54 @@ describe('get by postcode endpoint', () => {
 		sandbox.restore();
 	});
 
-	fixtures.forEach(fixture => {
-		
-		it('returns a 200 OK with the correct result', (done) => {
-			datasources.clinics.getByPartialPostcode.returns(new Promise.resolve(fixture.data));
+	describe('valid response from datasource', () => {
+	
+		fixtures.forEach(fixture => {
 			
-			app.get(`${uri}/${fixture.postcodeURIParam}`)
-			   .send()
-			   .expect(200)
-			   .expect('Content-Type', /json/)
-			   .end((err,res) => {
-				if(err) {
-					done(err);
-				} else {
-					res.body.length.should.equal(fixture.expectedClinics);
-					
-					res.body.forEach(clinic => { console.log(clinic);
-						clinic.formatted.should.exist;
-					});
+			it('returns a 200 OK with the correct result', (done) => {
+				datasources.clinics.getByPartialPostcode.returns(new Promise.resolve(fixture.data));
+				
+				app.get(`${uri}/${fixture.postcodeURIParam}`)
+				   .send()
+				   .expect(200)
+				   .expect('Content-Type', /json/)
+				   .end((err,res) => {
+					if(err) {
+						done(err);
+					} else {
+						res.body.length.should.equal(fixture.expectedClinics);
+						res.body.forEach(clinic =>  clinic.formatted.should.exist);
+	
+						done();					
+					}
+				   });
+			});		
+		});
+	});
 
-					done();					
-				}
-			   });
-		});		
+	describe('rejection from datasource', () => {
+
+		it('returns a 400 if an invalid postcode is passed', () => {
+			datasources.clinics.getByPartialPostcode.returns(new Promise.reject({ message : 'Invalid Postcode' }));
+
+			app.get('clinics/name/test')
+				.send()
+				.expect(400, {
+					message : 'Invalid Postcode'
+				})
+				.expect('Content-Type', /json/)
+				.end(err => done(err))
+
+		});
+
+		it('returns a 500', () => {
+			datasources.clinics.getByPartialPostcode.returns(new Promise.reject({ error : 'mock error' }));
+	
+			app.get('clinics/name/test')
+				.send()
+				.expect(500)
+				.expect('Content-Type', /json/)
+				.end(err => done(err))
+		});
 	});
 });

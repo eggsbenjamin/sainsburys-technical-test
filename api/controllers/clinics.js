@@ -18,7 +18,7 @@ var getByPostCodeHandler = (req,res) => {
 		let handleSuccess = (clinics) => { 
 			
 			let results = clinics.result
-				.filter(clinic => (clinic.postcode === postcode) ? true : false)
+				.filter(clinic => clinic.postcode === postcode)
 				.map(clinic => {
 					let formattedAddress = helpers.address.format({
 						address1 : clinic.address1,
@@ -29,9 +29,10 @@ var getByPostCodeHandler = (req,res) => {
 					}); 
 	
 					clinic.formatted = `${clinic.organisation_name} (${formattedAddress})`;
+				
+					return clinic;	
 				});
 
-			res.statusCode = 200;
 			res.setHeader('Content-Type', 'application/json');
 			res.end(JSON.stringify(results));
 		}
