@@ -3,7 +3,7 @@ var Router = require('node-simple-router');
 var config = require('./config');
 var controllers = require('./api/controllers');
 var app = new Router({
-	logging : false		//	disable 'node-simple-router' default logging
+	logging : true		//	disable 'node-simple-router' default logging
 });
 
 /*
@@ -21,4 +21,6 @@ app.get('/clinics/city/:name', controllers.clinics.getByCity);
 */
 
 http.createServer(app).listen(config.server.port);
+
+module.exports = app;
 

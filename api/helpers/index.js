@@ -1,5 +1,5 @@
-var postcode = require('postode');
-var address = require('address');
+var postcode = require('./postcode');
+var address = require('./address');
 
 module.exports = {
 	postcode : postcode,
