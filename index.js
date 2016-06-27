@@ -16,6 +16,11 @@ app.get('/clinics/postcode/:postcode', controllers.clinics.getByPostCode);
 app.get('/clinics/name/:name', controllers.clinics.getByName);
 app.get('/clinics/city/:name', controllers.clinics.getByCity);
 
+//	service
+
+app.get('/ping', controllers.service.ping);
+app.get('/healthcheck', controllers.service.healthcheck);
+
 /*
 	initialise
 */
