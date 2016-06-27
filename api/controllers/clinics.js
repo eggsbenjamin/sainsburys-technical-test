@@ -29,7 +29,7 @@ var getByPostCodeHandler = (req,res) => {
 					}); 
 	
 					clinic.formatted = `${clinic.organisation_name || ''} (${formattedAddress})`;
-				console.log(clinic.formatted);
+					
 					return clinic;	
 				});
 
@@ -94,7 +94,7 @@ var getByNameHandler = (req,res) => {
 				city : clinic.city
 			}); 
 
-			clinic.formatted = `${clinic.organisation_name || ''} (${formattedAddress})`; console.log(clinic.formatted);
+			clinic.formatted = `${clinic.organisation_name || ''} (${formattedAddress})`;
 		});
 		
 		res.setHeader('Content-Type', 'application/json');
