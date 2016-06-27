@@ -24,7 +24,6 @@
   },
   "homepage": "https://github.com/eggsbenjamin/sainsburys-technical-test#readme",
   "devDependencies": {
-    "node-mocks-http": "^1.5.2",
     "should": "^9.0.2",
     "sinon": "^1.17.4",
     "supertest": "^1.2.0"

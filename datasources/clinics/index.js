@@ -1,6 +1,6 @@
 var request = require('request-promise');
 var Promise = require('bluebird');	//	'request-as-promised' uses this Promise implementation
-var config = require('../../config').api;
+var config = require('../../config');
 var logger = require('../../logger');
 
 /** 
@@ -50,17 +50,18 @@ var _handleError = (response) => {
 */
 
 var getByPartialPostcode = function(partialPostcode) {
-	logger.log('INFO', `making request to ${config.endpoints.CLINICS_POSTCODE}`, {
+	logger.log('INFO', `making request to ${config.api.endpoints.CLINICS_POSTCODE}`, {
 	partial_postcode : partialPostcode
 	});	
 
 
 	return request({
-		uri : config.endpoints.CLINICS_POSTCODE,
+		uri : config.api.endpoints.CLINICS_POSTCODE,
 		qs : {
 			partial_postcode : partialPostcode
 		},
 		json : true,
+		timeout : config.datasources.connection.timeout,
 		resolveWithFullResponse : true
 	}).then(_handleSuccess)
 	.catch(_handleError);
@@ -74,17 +75,18 @@ var getByPartialPostcode = function(partialPostcode) {
 */
 
 var getByName = function(name) {
-	logger.log('INFO', `making request to ${config.endpoints.CLINICS_NAME}`, {
+	logger.log('INFO', `making request to ${config.api.endpoints.CLINICS_NAME}`, {
 		organisation_name : name
 	});	
 
 
 	return request({
-		uri : config.endpoints.CLINICS_NAME,
+		uri : config.api.endpoints.CLINICS_NAME,
 		qs : {
 			organisation_name : name
 		},
 		json : true,
+		timeout : config.datasources.connection.timeout,
 		resolveWithFullResponse : true
 	}).then(_handleSuccess)
 	.catch(_handleError);
@@ -98,17 +100,18 @@ var getByName = function(name) {
 */
 
 var getByCity = function(city) { 
-	logger.log('INFO', `making request to ${config.endpoints.CLINICS_CITY}`, {
+	logger.log('INFO', `making request to ${config.api.endpoints.CLINICS_CITY}`, {
 		city : city
 	});	
 	
 
 	return request({
-		uri : config.endpoints.CLINICS_CITY,
+		uri : config.api.endpoints.CLINICS_CITY,
 		qs : {
 			city : city
 		},
 		json : true,
+		timeout : config.datasources.connection.timeout,
 		resolveWithFullResponse : true
 	}).then(_handleSuccess)
 	.catch(_handleError);

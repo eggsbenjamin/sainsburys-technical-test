@@ -2,6 +2,7 @@ var http = require('http');
 var Router = require('node-simple-router');
 var config = require('./config');
 var controllers = require('./api/controllers'); 
+var logger = require('./logger');
 var app = new Router({
 	logging : false		//	disable 'node-simple-router' default logging
 });
@@ -26,6 +27,15 @@ app.get('/healthcheck', controllers.service.healthcheck);
 */
 
 http.createServer(app).listen(config.server.port);
+
+/*
+	handle uncaught exceptions
+*/
+
+process.on('uncaughtException', ex => {  
+	logger.log('ERROR', 'uncaught fatal exception', ex.Error);
+	process.exit(1);
+});
 
 module.exports = app;
 
