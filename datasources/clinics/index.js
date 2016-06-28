@@ -12,9 +12,9 @@ var logger = require('../../logger');
 
 var _handleSuccess = (response) => {  
 	logger.log('INFO', `response from : ${response.request.href} (${response.statusCode})`,{
-	method : response.request.method,
-	href : response.request.href
-});
+		method : response.request.method,
+		href : response.request.href
+	});
 	return response.body;
 }
 
@@ -51,7 +51,7 @@ var _handleError = (response) => {
 
 var getByPartialPostcode = function(partialPostcode) {
 	logger.log('INFO', `making request to ${config.api.endpoints.CLINICS_POSTCODE}`, {
-	partial_postcode : partialPostcode
+		partial_postcode : partialPostcode
 	});	
 
 
