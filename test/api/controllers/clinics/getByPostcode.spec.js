@@ -46,30 +46,4 @@ describe('get by postcode endpoint', () => {
 			});		
 		});
 	});
-
-	describe('rejection from datasource', () => {
-
-		it('returns a 400 if an invalid postcode is passed', () => {
-			datasources.clinics.getByPartialPostcode.returns(new Promise.reject({ message : 'Invalid Postcode' }));
-
-			app.get('clinics/name/test')
-				.send()
-				.expect(400, {
-					message : 'Invalid Postcode'
-				})
-				.expect('Content-Type', /json/)
-				.end(err => done(err))
-
-		});
-
-		it('returns a 500', () => {
-			datasources.clinics.getByPartialPostcode.returns(new Promise.reject({ error : 'mock error' }));
-	
-			app.get('clinics/name/test')
-				.send()
-				.expect(500)
-				.expect('Content-Type', /json/)
-				.end(err => done(err))
-		});
-	});
 });

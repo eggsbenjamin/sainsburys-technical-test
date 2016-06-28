@@ -32,7 +32,7 @@ http.createServer(app).listen(config.server.port);
 	handle uncaught exceptions
 */
 
-process.on('uncaughtException', ex => {  
+process.on('uncaughtException', ex => { console.log(ex); 
 	logger.log('ERROR', 'uncaught fatal exception', ex.Error);
 	process.exit(1);
 });

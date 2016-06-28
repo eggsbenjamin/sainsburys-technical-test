@@ -82,7 +82,7 @@ let getByPostCode = (req,res) => {
 
 	        logger.log('ERROR', `response sent : ${req.url}`, {
                         statusCode : res.statusCode,
-                        message : err.message
+                        message : ex.message
                 });
         }
 }
