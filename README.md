@@ -25,7 +25,7 @@ npm start
 ```
 localhost:3000
 
-the defaut port is 3000 but this can e chaned in the config
+the defaut port is 3000 but this changed in the config
 
 ## Design Decisions
 
