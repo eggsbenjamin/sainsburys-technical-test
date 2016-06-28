@@ -53,7 +53,7 @@ I did want to unit test all handlers but, due to time constraints, I decided to 
 
 ### Improvements
 
-The status codes don't give too much away. You're either going to to get a 200 with the required result from an endpoint or a 500 if anything goes wrong. The only endpoint that gives a meaningful message on a particular error is '/clinics/:postcode' where a 400 is returned if a potentially valid postcode is passed as the postcode URI parameter. The app would be more user friendly if it gave informative HTTP Status codes and messages when an error/bad request occurs.
+The status codes don't give too much away. You're either going to to get a 200 with the required result from an endpoint or a 500 if anything goes wrong. The only endpoint that gives a meaningful message on a particular error is '/clinics/:postcode' where a 400 is returned if a potentially invalid postcode is passed as the postcode URI parameter. The app would be more user friendly if it gave informative HTTP Status codes and messages when an error/bad request occurs.
 
 The logging should be supressed during the tetsts.  
 
