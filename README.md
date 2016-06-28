@@ -15,9 +15,17 @@ cd  sainsburys-technical-test
 npm install
 
 npm test 
-
-npm start
 ```
+
+### Run
+
+```
+npm start
+
+```
+localhost:3000
+
+the defaut port is 3000 but this can e chaned in the config
 
 ## Design Decisions
 
