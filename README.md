@@ -8,19 +8,19 @@
 * mocha 2.4.5^
 
 ```
-git clone https://github.com/eggsbenjamin/sainsburys-technical-test.git
+$ git clone https://github.com/eggsbenjamin/sainsburys-technical-test.git
 
-cd  sainsburys-technical-test
+$ cd  sainsburys-technical-test
 
-npm install
+$ npm install
 
-npm test 
+$ npm test 
 ```
 
 ### Run
 
 ```
-npm start
+$ npm start
 ```
 localhost:3000
 
