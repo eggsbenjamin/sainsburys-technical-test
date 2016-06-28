@@ -1,5 +1,24 @@
 # Nodejs Technical Tests
 
+### Setup
+
+#### Dependencies
+
+* node 6.0.0
+* mocha 2.4.5^
+
+```
+git clone https://github.com/eggsbenjamin/sainsburys-technical-test.git
+
+cd  sainsburys-technical-test
+
+npm install
+
+npm test 
+
+npm start
+```
+
 ## Design Decisions
 
 Normally when building a HTTP server my first port of call would be express.js or another framework that provides various API's to make building an application that much easier and faster. Because this exercise is designed for candidates to demonstrate their abilities I tried to use as few NPM modules as possible.
@@ -25,6 +44,13 @@ Although I found node-simple-router met the majority of my requirements I found 
 
 I did want to unit test all handlers but, due to time constraints, I decided to use supertest to make requests to each endpoint but mock the datasources (data.gov endpoints) to test the handlers and their integration simultaneously.
 
+### Improvements
+
+The status codes don't give too much away. You're either going to to get a 200 with the required result from an endpoint or a 500 if anything goes wrong. The only endpoint that gives a meaningful message on a particular error is '/clinics/:postcode' where a 400 is returned if a potentially valid postcode is passed as the postcode URI parameter. The app would be more user friendly if it gave informative HTTP Status codes and messages when an error/bad request occurs.
+
+The logging should be supressed during the tetsts.  
+
+### TODO
 
 * ~~[x] __Logger__~~
 * ~~[x] __Helper Functions_~~_

@@ -4,7 +4,8 @@
   "description": "Nodejs Technical Test",
   "main": "server.js",
   "scripts": {
-    "test": "mocha --recursive"
+    "test": "mocha --recursive",
+    "start" : "node ./index.js"
   },
   "repository": {
     "type": "git",
